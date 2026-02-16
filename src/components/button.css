@@ -10,3 +10,7 @@
 .button:hover{
     opacity: 0.5;
 }
+.activ{
+    background-color: blue;
+    color: azure;
+}

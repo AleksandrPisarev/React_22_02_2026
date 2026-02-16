@@ -5,25 +5,29 @@ import {data} from './source/data'
 import { useState } from 'react'
 
 export default function App() {
-  const [count, setVisibleCount] = useState(1);
+  const [count, setCount] = useState(1)
+  const [isClicked, setIsClicked] = useState(null)
+
   function handlClick(type){
     if (type == 'добавить' && count < data.length) {
-      setVisibleCount(count + 1);
+      setCount(count + 1)
+      setIsClicked(type)
     }
     if (type == 'удалить' && count > 1) {
-      setVisibleCount(count - 1);
+      setCount(count - 1)
+      setIsClicked(type)
     }
   }
+
   return (
     <>
     <div className='cardlist'>
       {data.slice(0, count).map((item, index) => (
-        <Card key={index} {...item} />
-      ))}
+        <Card key={index} {...item} />))}
     </div>
     <div className='batton'>
-      <Button btnclick={() => handlClick('добавить')}>добавить</Button>
-      <Button btnclick={() => handlClick('удалить')}>удалить</Button>
+      <Button active={isClicked == 'добавить'} btnclick={() => handlClick('добавить')}>добавить</Button>
+      <Button active={isClicked == 'удалить'} btnclick={() => handlClick('удалить')}>удалить</Button>
     </div>
     </>
   )
